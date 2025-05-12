@@ -187,14 +187,19 @@ void Student_Manager::Show_Topper() {
         return;
     }
 
-    auto top_iterator = max_element(student_list.begin(), student_list.end(), [](const Student& a, const Student& b) {
+    // Tìm điểm cao nhất
+    float maxMark = max_element(student_list.begin(), student_list.end(), [](const Student& a, const Student& b) {
         return a.getMark() < b.getMark();
-    });
+    })->getMark();
 
-    // max_element trả về iterator, nên cần kiểm tra xem nó có phải là end() không (dù student_list.empty() đã kiểm tra)
-    if (top_iterator != student_list.end()) {
-        cout << "\n--- Topper Student ---" << endl;
-        top_iterator->printInfo();
+    cout << "\n--- Topper Student(s) ---" << endl;
+
+    // In ra tất cả sinh viên có điểm bằng điểm cao nhất
+    for (const auto& s : student_list) {
+        if (s.getMark() == maxMark) {
+            s.printInfo();
+            cout << "----------------------\n";
+        }
     }
 }
 

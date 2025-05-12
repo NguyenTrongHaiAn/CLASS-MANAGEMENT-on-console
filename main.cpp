@@ -11,9 +11,9 @@ void display_MENU() {
     cout << "2. Delete a student" << endl;
     cout << "3. Display all students" << endl;
     cout << "4. Search student by ID" << endl;  
-    cout << "5. Sort students and print" << endl;
+    cout << "5. Sort students " << endl;
     cout << "6. Edit student" << endl;
-    cout << "7. Show topper with highest mark " << endl;
+    cout << "7. Show toppers with highest mark " << endl;
     cout << "8. Show average of all students " << endl;
     cout << "9. Display all student deleted " << endl;
     cout << "10. Search student deleted by ID" << endl; // Sửa ENDL thành endl
