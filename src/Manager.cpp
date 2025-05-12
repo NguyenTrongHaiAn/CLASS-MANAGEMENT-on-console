@@ -369,9 +369,9 @@ void Student_Manager::Delete_Student() {
 
         student_list.erase(it);
         Save_to_file();
-        cout << "Da xoa sinh vien va luu vao danh sach bi xoa.\n";
+        cout << "Delete students and save them to the deleted list.\n";
     } else {
-        cout << "Khong tim thay sinh vien voi ID " << id_to_delete << ".\n";
+        cout << "Cannot find student with ID" << id_to_delete << ".\n";
     }
 }
 
@@ -400,10 +400,10 @@ void Student_Manager::Load_Deleted_Students_From_File() {
             try {
                 mark_val = stof(mark_str_val);
             } catch (const std::invalid_argument& ia) {
-                cerr << "Loi dinh dang diem trong " << FILENAME_DELETED << " (ID: " << id_str << "): " << mark_str_val << ". Su dung diem mac dinh 0.0." << endl;
+                cerr << "Error in point format" << FILENAME_DELETED << " (ID: " << id_str << "): " << mark_str_val << ". Su dung diem mac dinh 0.0." << endl;
                 mark_val = 0.0f;
             } catch (const std::out_of_range& oor) {
-                cerr << "Diem ngoai pham vi trong " << FILENAME_DELETED << " (ID: " << id_str << "): " << mark_str_val << ". Su dung diem mac dinh 0.0." << endl;
+                cerr << "Points outside the range" << FILENAME_DELETED << " (ID: " << id_str << "): " << mark_str_val << ". Su dung diem mac dinh 0.0." << endl;
                 mark_val = 0.0f;
             }
 
@@ -415,7 +415,7 @@ void Student_Manager::Load_Deleted_Students_From_File() {
             DeletedStudent s(name_str, mark_val, id_str, course_str, course_id_str, reason_str);
             deletedStudents.push_back(s);
         } else {
-            cerr << "Loi doc dong trong file " << FILENAME_DELETED << ": " << line << endl;
+            cerr << "Error reading text in file" << FILENAME_DELETED << ": " << line << endl;
         }
     }
     inFile.close();
@@ -425,15 +425,15 @@ void Student_Manager::Display_Deleted_Students() {
     if (deletedStudents.empty()) {
         cout << "No deleted students to display." << endl; // Sửa thông báo
     } else {
-        cout << "\n---------- Danh sach sinh vien da xoa ----------" << endl; // Sửa tiêu đề
+        cout << "\n----------List of deleted students ----------" << endl; // Sửa tiêu đề
         for (const auto& student : deletedStudents) {
             // In đầy đủ thông tin hơn
              cout << "ID: " << student.getStudent_id()
-                 << ", Ten: " << student.getName()
-                 << ", Diem: " << student.getMark()
-                 << ", Khoa hoc: " << student.getCourse()
-                 << ", Ma KH: " << student.getId_course()
-                 << ", Ly do xoa: " << student.getDeleteReason() << endl;
+                 << ", NAME: " << student.getName()
+                 << ", MARK: " << student.getMark()
+                 << ", Course: " << student.getCourse()
+                 << ", ID Course: " << student.getId_course()
+                 << ", reseon delete : " << student.getDeleteReason() << endl;
             // Hoặc đơn giản là gọi student.printInfo() nếu nó đã được định dạng theo ý muốn
             // student.printInfo();
         }
@@ -453,7 +453,7 @@ void Student_Manager::search_deleted_id() {
     bool found = false;
     for (const auto& student : deletedStudents) {
         if (student.getStudent_id() == studentID_to_search) {
-            cout << "\n--- Thong tin sinh vien da xoa tim thay ---" << endl;
+            cout << "\n--- Information about students who have been deleted ---" << endl;
             student.printInfo();
             found = true;
             break;

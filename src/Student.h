@@ -15,7 +15,7 @@ private:
 
 public:
     // Constructor
-    Student(string name = "", float mark = 0.0, string student_id = "", string course = "", string id_course = "");
+    Student(string name , float mark , string student_id , string course , string id_course );
 
     // Getters
     string getName() const;
@@ -49,6 +49,8 @@ public:
     void setDeleteReason(string reason);
 
     void printInfo() const override;
+
+    // override ghi đèn lên phương thức cha ,ghi đè ở phần code .cpp 
 };
 
 #endif // student_h
